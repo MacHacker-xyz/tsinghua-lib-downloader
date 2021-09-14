@@ -1,4 +1,4 @@
-# 有图形化的清华大学教参服务平台 Downloader
+# 有图形化界面的清华大学教参服务平台 Downloader
 
 Download pages from http://reserves.lib.tsinghua.edu.cn/
 
