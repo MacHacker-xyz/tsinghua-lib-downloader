@@ -1,6 +1,4 @@
-# 清华大学教参服务平台 Downloader
-
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/i207M/reserves-lib-tsinghua-downloader) ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/i207M/reserves-lib-tsinghua-downloader/Release%20Test/main) ![GitHub issues](https://img.shields.io/github/issues/i207M/reserves-lib-tsinghua-downloader)
+# 有图形化的清华大学教参服务平台 Downloader
 
 Download pages from http://reserves.lib.tsinghua.edu.cn/
 
