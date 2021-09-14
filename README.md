@@ -36,40 +36,6 @@ Q: 分享一点高级玩法？
 
 A: 使用学校提供的正版福昕编辑器可以进行OCR文字识别。
 
-## Advanced Settings
-
-Run `downloader --help` in terminal.
-
-```
-usage: downloader.exe [-h] [--url URL] [--no-pdf] [--no-img] [--quality QUALITY] [--con CON] [--resume]
-
-See README.md for help. Repo: https://github.com/i207M/reserves-lib-tsinghua-downloader
-
-optional arguments:
-  -h, --help         show this help message and exit
-  --url URL          input target URL
-  --no-pdf           disable generating PDF
-  --no-img           disable saving images
-  --quality QUALITY  reduce file size, [1, 96] (85 by recommendation, 96 by default)
-  --con CON          the number of concurrent downloads (6 by default)
-  --resume           skip downloading images (for testing)
-```
-
-希望尝鲜？从GitHub Actions中下载预览版的可执行文件！可执行文件由Pyinstaller打包。
-
-## TODO
-
-- PDF Bookmark
-- You tell me
-
-## Contribution
-
-请查看[`contribution.md`](/contribution.md)。
-
----
-
-欢迎Star/Issue/PR.
-
 *仅供学习编程，请勿用于非法用途！*
 
 更多清华常用信息/服务汇总请看[这里](https://github.com/ZenithalHourlyRate/thuservices)。
