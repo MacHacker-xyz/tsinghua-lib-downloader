@@ -64,7 +64,7 @@ def download(url, quality,  download_path, window, var) -> None:
 
     need_cookie = ('/books/' in url)  # magic
     cookie = get_cookie() if need_cookie else {}
-
+    print("1")
     session = requests.session()
     session.cookies = requests.utils.cookiejar_from_dict(cookie)
     session.headers.update({
@@ -102,32 +102,3 @@ def download(url, quality,  download_path, window, var) -> None:
         print(f'PDF path: {pdf_path}')
 
     print('Done.')
-
-if __name__ == '__main__':
-    parser = ArgumentParser(
-        description='See README.md for help. '
-        'Repo: https://github.com/i207M/reserves-lib-tsinghua-downloader'
-    )
-    parser.add_argument('--url', type=str, help='input target URL')
-    parser.add_argument('--no-pdf', action='store_true', help='disable generating PDF')
-    parser.add_argument('--no-img', action='store_true', help='disable saving images')
-    parser.add_argument(
-        '--quality',
-        type=int,
-        default=96,
-        help='reduce file size, [1, 96] (85 by recommendation, 96 by default)'
-    )
-    parser.add_argument(
-        '--con', type=int, default=6, help='the number of concurrent downloads (6 by default)'
-    )
-    parser.add_argument(
-        '--path', type=str, help='please input the save path'
-    )
-    parser.add_argument('--resume', action='store_true', help='skip downloading images (for testing)')
-    args = parser.parse_args()
-    url = args.url
-    quality = args.quality
-    try:
-        download(url, not args.no_pdf, not args.no_img, quality, args.con, args.resume, download_path=args.path)
-    except:
-        print("下载失败！")

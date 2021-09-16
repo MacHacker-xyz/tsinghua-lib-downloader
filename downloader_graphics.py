@@ -9,6 +9,7 @@ from PIL import Image,ImageTk
 
 thread = None
 
+
 def begin():
     url = entry1.get()
     quality = str(scale2.get())
@@ -21,31 +22,20 @@ def begin():
     thread = threading.Thread(target=downloader.implicit_download,args=(url, quality, download_path, window, var1))
     thread.start()
 
-
 if __name__=="__main__":
     window = tk.Tk()
     window.geometry("650x391")
     window.title("教参平台爬虫")
     window.maxsize(width=650,height=391)
     window.minsize(width=650,height=391)
-    ft = tkFont.Font(family='ComicSansMS', size=20, weight=tkFont.BOLD)
-    image = Image.open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"bk.png"))
-    photo = ImageTk.PhotoImage(image)
-
-    background = tk.Label(
-        window,
-        image=photo,
-        compound = tk.CENTER,
-    )
     
-    background.pack()
+    ft = tkFont.Font(family='ComicSansMS', size=20, weight=tkFont.BOLD)
     
     var1 = tk.StringVar()
     label1 = tk.Label(
         window,
         text="网址",
         font=ft,
-        background="#F7F7F7"
     )
     label1.place(
         anchor="n",
@@ -65,7 +55,6 @@ if __name__=="__main__":
         window,
         text="质量（1-96）",
         font=ft,
-        background="#F7F7F7"
     )
     
     label2.place(
@@ -81,7 +70,6 @@ if __name__=="__main__":
         variable=96,
         font=ft,
         orient=tk.HORIZONTAL,
-        background="#F7F7F7"
     )
     scale2.set(96)
     scale2.place(
@@ -94,7 +82,6 @@ if __name__=="__main__":
         text="本软件仅供学习编程知识\n发售盗版内容者承担一切法律责任",
         font=tkFont.Font(family='ComicSansMS', size=20, weight=tkFont.BOLD),
         fg="Red",
-        background="#F7F7F7"
     )
     label_warning.place(
         anchor="n",
@@ -119,7 +106,6 @@ if __name__=="__main__":
         window,
         textvariable=var1,
         font=ft,
-        background="#F7F7F7"
     )
     label3.place(
         anchor="n",
