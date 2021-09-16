@@ -11,8 +11,7 @@ Download pages from http://reserves.lib.tsinghua.edu.cn/
 点击右侧[Releases](https://github.com/i207M/reserves-lib-tsinghua-downloader/releases/latest)，下载`Assets`中的`downloader.exe`。
 
 ## 使用方法
-
-<img width="1718" alt="截屏2021-09-16 下午3 36 42" src="https://user-images.githubusercontent.com/77945509/133570401-bb04d02a-6555-40d4-b607-fa9bf38004ae.png">
+<img width="1718" alt="截屏2021-09-16 下午3 36 42" src="https://user-images.githubusercontent.com/77945509/133570595-81a624c1-0a81-4ddc-82f6-dfaf12b61a35.png">
 
 
 运行软件，输入`阅读全文`之下的链接地址（如图中标黄的位置）。程序会自动爬取当前章节以下的所有章节。
