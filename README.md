@@ -1,42 +1,27 @@
-# 有图形化界面的清华大学教参服务平台 Downloader
+# 有图形化界面的清华大学教参服务平台下载器
+<img width="762" alt="截屏2021-09-16 下午3 31 03" src="https://user-images.githubusercontent.com/77945509/133569567-39b61b75-4003-4d71-abb5-36d42201d0b1.png">
+
 
 Download pages from http://reserves.lib.tsinghua.edu.cn/
 
 自动下载书籍每一页的原图，免登录。
 
-## Download
+## 下载软件
 
 点击右侧[Releases](https://github.com/i207M/reserves-lib-tsinghua-downloader/releases/latest)，下载`Assets`中的`downloader.exe`。
 
-## Usage
+## 使用方法
 
 ![image-20210308204615230](https://i.loli.net/2021/03/08/zVAYweuK7cHk5os.png)
 
-运行`downloader`，输入`阅读全文`之下的链接地址（如图中标黄的位置）。程序会自动爬取当前章节以下的所有章节。
+运行软件，输入`阅读全文`之下的链接地址（如图中标黄的位置）。程序会自动爬取当前章节以下的所有章节。
 
-程序会将图片保存在`./clawed`下，并自动生成PDF。
+程序会将图片保存在你选择的目标路径下，并自动生成PDF。
 
-**此程序无需登录即可使用**。
+**此软件程序无需登录即可使用**。
 
 ## Q&A
-
-Q: 运行报错`ModuleNotFoundError`，怎么办？
-
-A: 在终端中运行`pip install -r requirements.txt`以安装依赖。
-
-Q: 运行报错`Cookie Required`，怎么办？
-
-A: 经测试，绝大部分教参无需`cookie`即可访问。少数教参需要`cookie`进行身份验证，请将网站`cookie`中，`.ASPXAUTH`和`ASP.NET_SessionId`的值依次写入`cookie.txt`中，每行一个。（我将会完善获取网站`cookie`的相关教程。若急需，请与我发邮件）
-
-Q: 下载的章节不全？
-
-A: 这是因为此图书的目录编号不连续。请再次运行程序并输入下一位置的章节链接。
-
-Q: 分享一点高级玩法？
-
-A: 使用学校提供的正版福昕编辑器可以进行OCR文字识别。
 
 *仅供学习编程，请勿用于非法用途！*
 
 更多清华常用信息/服务汇总请看[这里](https://github.com/ZenithalHourlyRate/thuservices)。
-
