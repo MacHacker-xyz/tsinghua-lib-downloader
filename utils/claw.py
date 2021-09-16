@@ -1,4 +1,5 @@
 import time
+import sys
 
 import requests
 
@@ -6,14 +7,14 @@ from utils.concurrent import concurrent_download
 from utils.http import get_file_list
 
 
-def claw_book4(url: str, concurrent: int, session: requests.Session):
+def claw_book4(url: str, concurrent: int, session: requests.Session, window, var):
 
     print('Fetching chapters...')
 
     chapter_list = get_file_list(url, session)
-    print(f'Found {len(chapter_list)} chapters')
+    print(f'Found {len(chapter_list)} chapters.')
 
-    print('Clawing...')
+    print(f'Clawing with {concurrent} thread(s)...')
 
     total_page = 0
     total_time = 0
@@ -21,12 +22,15 @@ def claw_book4(url: str, concurrent: int, session: requests.Session):
     for chapter_url in chapter_list:
         chapter_id = chapter_url[-12:-1]
         print(f'Clawing chapter {chapter_id}')
+        var.set(f'正在下载第{chapter_id+1}章')
+        window.update()
         time_usage = time.time()
         page_list = [
             'http://reserves.lib.tsinghua.edu.cn' + url for url in get_file_list(
                 'http://reserves.lib.tsinghua.edu.cn' + chapter_url + 'files/mobile/', session
             )
         ]
+        page_list.sort(key=lambda url: int(url[76:-4]))
 
         img_list = []
         concurrent_download(page_list, img_list, session, concurrent)
@@ -39,6 +43,8 @@ def claw_book4(url: str, concurrent: int, session: requests.Session):
         print('*' * 20)
 
     print(f'Clawed {total_page} pages in total, time usage:{total_time: .3f}s')
+    var.set(f'下载已完成！\n总共下载{total_page}页,用时{total_time: .3f}s')
+    window.update()
     return imgs
 
 
@@ -60,7 +66,7 @@ def get_image(url: str, session: requests.Session) -> requests.Response:
     ret.raise_for_status()
 
 
-def claw(url: str, session: requests.Session):
+def claw(url: str, session: requests.Session, window, var):
 
     print('Clawing...')
 
@@ -93,6 +99,12 @@ def claw(url: str, session: requests.Session):
                 break
             img_list.append(ret.content)
             cnt += 1
+            sys.stdout.write(f'Downloaded Page #{cnt}')
+            sys.stdout.write('\r')
+            sys.stdout.flush()
+            
+            var.set(f'正在下载第{chapter_id+1}章第{cnt}页')
+            window.update()
 
         imgs[chapter_id] = img_list
         time_usage = time.time() - time_usage
@@ -101,6 +113,10 @@ def claw(url: str, session: requests.Session):
         print(f'Clawed {len(img_list)} pages, time usage:{time_usage: .3f}s')
         print('*' * 20)
         chapter_id += 1
+        
+        
 
     print(f'Clawed {total_page} pages in total, time usage:{total_time: .3f}s')
+    var.set(f'下载已完成！\n总共下载{total_page}页,用时{total_time: .3f}s')
+    window.update()
     return imgs

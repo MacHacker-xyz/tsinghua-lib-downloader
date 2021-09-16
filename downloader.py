@@ -1,7 +1,7 @@
 import os
+import sys
 from argparse import ArgumentParser
 from distutils.util import strtobool
-from tkinter.constants import HORIZONTAL
 
 import requests
 
@@ -9,9 +9,7 @@ from utils.claw import claw, claw_book4
 from utils.cookie import get_cookie
 from utils.image import resize
 from utils.pdf import generate_pdf
-import tkinter as tk
-import tkinter.font as tkFont
-from tkinter import filedialog
+
 
 __author__ = 'i207M'
 
@@ -44,10 +42,21 @@ def resume_file(img_dir: str):
     return imgs
 
 
-def download(url: str, gen_pdf=True, save_img=True, quality=96, concurrent=6, resume=False, download_path = None) -> None:
+def implicit_download(url, quality,  download_path, window, var):
+    try:
+        download(url, quality,  download_path, window, var)
+    except:
+        var.set("下载失败！")
+        window.update()
 
+def download(url, quality,  download_path, window, var) -> None:
+    ##############
+    gen_pdf=True
+    save_img=True
+    concurrent=6
+    resume=False
+    ###############
     print('Preparing...')
-
     url = get_base_url(url)
     sep = url[:-11].rfind('/')
     book_id = url[sep + 1:sep + 9]
@@ -64,16 +73,15 @@ def download(url: str, gen_pdf=True, save_img=True, quality=96, concurrent=6, re
     })
 
     if resume:
-        print('Resuming...')
         imgs = resume_file(img_dir)
     elif '/book4/' in url:
         url = url[:-11]
-        imgs = claw_book4(url, concurrent, session)
+        imgs = claw_book4(url, concurrent, session,window,var)
     else:
-        print('Unable to download concurrently due to limitations')
-        imgs = claw(url, session,window)
-
-    if quality < 96:
+        imgs = claw(url, session,window,var)
+    
+    if int(quality) < 96:
+        print('Optimizing images...')
         print('Optimizing images...')
         for img_list in imgs.values():
             resize(img_list, quality)
@@ -89,17 +97,11 @@ def download(url: str, gen_pdf=True, save_img=True, quality=96, concurrent=6, re
 
     if gen_pdf:
         print('Generating PDF...')
-        pdf_path =download_path+ '\\' + book_id + '.pdf'
-        print(pdf_path)
+        pdf_path =download_path+os.path.sep+book_id + '.pdf'
         generate_pdf(pdf_path, imgs)
         print(f'PDF path: {pdf_path}')
-        
-    
-    print('Done')
 
-def selectPath():
-    path_ = filedialog.askdirectory()
-    path.set(path_)
+    print('Done.')
 
 if __name__ == '__main__':
     parser = ArgumentParser(
@@ -118,76 +120,14 @@ if __name__ == '__main__':
     parser.add_argument(
         '--con', type=int, default=6, help='the number of concurrent downloads (6 by default)'
     )
+    parser.add_argument(
+        '--path', type=str, help='please input the save path'
+    )
     parser.add_argument('--resume', action='store_true', help='skip downloading images (for testing)')
     args = parser.parse_args()
     url = args.url
     quality = args.quality
-    
-    
-    if url is None:
-        def begin():
-            url = entry1.get()
-            quality = int(scale2.get())
-            path_ = filedialog.askdirectory()
-            var1.set("正在下载！")
-            window.update()
-            try:
-                download(url, not args.no_pdf, not args.no_img, quality, args.con, args.resume, download_path=path_)
-            except:
-                var1.set("下载失败！")
-                return 
-            var1.set("下载完成，可以重新下载！")
-        window = tk.Tk()
-        window.geometry("500x400")
-        window.title("教参平台爬虫")
-        ft = tkFont.Font(family='ComicSansMS', size=20, weight=tkFont.BOLD)
-        var1 = tk.StringVar()
-        label1 = tk.Label(
-            window,
-            text="网址",
-            font=ft
-        )
-        label1.pack()
-        entry1 = tk.Entry(
-            window,
-            font=ft
-        )
-        entry1.pack()
-        label2 = tk.Label(
-            window,
-            text="质量（1-96）",
-            font=ft
-        )
-        label2.pack()
-        scale2 = tk.Scale(
-            window,
-            from_=1,
-            to=96,
-            length=300,
-            font=ft,
-            orient=HORIZONTAL
-        )
-        scale2.pack()
-        label_warning = tk.Label(
-            window,
-            text="本软件仅供学习编程知识\n发售盗版内容者承担一切法律责任!",
-            font=tkFont.Font(family='ComicSansMS', size=20, weight=tkFont.BOLD),
-            fg="Red"
-        )
-        label_warning.pack()
-        button = tk.Button(
-            window,
-            text='下载',
-            command=begin,
-            font=tkFont.Font(family='ComicSansMS', size=30, weight=tkFont.BOLD),
-            height=1,
-            width=5
-        )
-        button.pack()
-        label3 = tk.Label(
-            window,
-            textvariable=var1,
-            font=ft
-        )
-        label3.pack()
-        window.mainloop()
+    try:
+        download(url, not args.no_pdf, not args.no_img, quality, args.con, args.resume, download_path=args.path)
+    except:
+        print("下载失败！")
