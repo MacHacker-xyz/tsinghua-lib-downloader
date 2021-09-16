@@ -23,5 +23,3 @@ Download pages from http://reserves.lib.tsinghua.edu.cn/
 ## Q&A
 
 *仅供学习编程，请勿用于非法用途！*
-
-更多清华常用信息/服务汇总请看[这里](https://github.com/ZenithalHourlyRate/thuservices)。
