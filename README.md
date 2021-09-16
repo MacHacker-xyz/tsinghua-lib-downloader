@@ -12,7 +12,8 @@ Download pages from http://reserves.lib.tsinghua.edu.cn/
 
 ## 使用方法
 
-![image-20210308204615230](https://i.loli.net/2021/03/08/zVAYweuK7cHk5os.png)
+<img width="1718" alt="截屏2021-09-16 下午3 36 42" src="https://user-images.githubusercontent.com/77945509/133570401-bb04d02a-6555-40d4-b607-fa9bf38004ae.png">
+
 
 运行软件，输入`阅读全文`之下的链接地址（如图中标黄的位置）。程序会自动爬取当前章节以下的所有章节。
 
