@@ -1,41 +1,50 @@
-import os
 import tkinter as tk
-from tkinter.constants import NO
 import tkinter.font as tkFont
 from tkinter import filedialog
 import downloader
 import threading
 from PIL import Image,ImageTk
 
-thread = None
-
-
+#"http://reserves.lib.tsinghua.edu.cn/book5//00001042/00001042000/mobile/index.html"
 def begin():
     url = entry1.get()
-    quality = str(scale2.get())
+    pdf_name = entry2.get()
     download_path = filedialog.askdirectory()
-    if len(download_path)==0:
+    
+    if len(download_path)==0 :
+        var1.set("请输入完整")
         return
+    
     var1.set("初始化！")
     window.update()
     global thread
-    thread = threading.Thread(target=downloader.implicit_download,args=(url, quality, download_path, window, var1))
+    thread = threading.Thread(target=downloader.implicit_download,args=(download_path,url,pdf_name, window, var1))
     thread.start()
+
 
 if __name__=="__main__":
     window = tk.Tk()
     window.geometry("650x391")
     window.title("教参平台爬虫")
     window.maxsize(width=650,height=391)
-    window.minsize(width=650,height=391)
+    window.minsize(width=650,height=391)    
+    image = Image.open("bk.png")
+    photo = ImageTk.PhotoImage(image)
+
+    background = tk.Label(
+        window,
+        image=photo,
+        compound = tk.CENTER,
+    )
     
-    ft = tkFont.Font(family='ComicSansMS', size=20, weight=tkFont.BOLD)
+    background.pack()
     
     var1 = tk.StringVar()
     label1 = tk.Label(
         window,
         text="网址",
-        font=ft,
+        background="#F7F7F7",
+        font=tkFont.Font(family='ComicSansMS', size=20, weight=tkFont.BOLD)
     )
     label1.place(
         anchor="n",
@@ -44,7 +53,7 @@ if __name__=="__main__":
     )
     entry1 = tk.Entry(
         window,
-        font=ft,
+        font=tkFont.Font(family='ComicSansMS', size=20, weight=tkFont.BOLD)
     )
     entry1.place(
         anchor="n",
@@ -53,26 +62,21 @@ if __name__=="__main__":
     )
     label2 = tk.Label(
         window,
-        text="质量（1-96）",
-        font=ft,
+        text="书名",
+        background="#F7F7F7",
+        font=tkFont.Font(family='ComicSansMS', size=20, weight=tkFont.BOLD)
     )
-    
     label2.place(
         anchor="n",
         x=325,
         y=80
     )
-    scale2 = tk.Scale(
+    entry2 = tk.Entry(
         window,
-        from_=1,
-        to=96,
-        length=300,
-        variable=96,
-        font=ft,
-        orient=tk.HORIZONTAL,
+        font=tkFont.Font(family='ComicSansMS', size=20, weight=tkFont.BOLD)
     )
-    scale2.set(96)
-    scale2.place(
+
+    entry2.place(
         anchor="n",
         x=325,
         y=120
@@ -80,8 +84,9 @@ if __name__=="__main__":
     label_warning = tk.Label(
         window,
         text="本软件仅供学习编程知识\n发售盗版内容者承担一切法律责任",
-        font=tkFont.Font(family='ComicSansMS', size=20, weight=tkFont.BOLD),
         fg="Red",
+        background="#F7F7F7",
+        font=tkFont.Font(family='ComicSansMS', size=20, weight=tkFont.BOLD)
     )
     label_warning.place(
         anchor="n",
@@ -92,24 +97,23 @@ if __name__=="__main__":
         window,
         text='下载',
         command=begin,
-        font=tkFont.Font(family='ComicSansMS', size=30, weight=tkFont.BOLD),
-        height=1,
         width=5,
+        font=tkFont.Font(family='ComicSansMS', size=30, weight=tkFont.BOLD)
     )
-    
     button.place(
         anchor="n",
         x=325,
-        y=250
+        y=240
     )
     label3 = tk.Label(
         window,
         textvariable=var1,
-        font=ft,
+        background="#F7F7F7",
+        font=tkFont.Font(family='ComicSansMS', size=20, weight=tkFont.BOLD)
     )
     label3.place(
         anchor="n",
         x=325,
-        y=300
+        y=290
     )
     window.mainloop()
