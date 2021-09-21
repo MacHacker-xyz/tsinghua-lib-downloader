@@ -1,9 +1,9 @@
 # 图形化教参平台自动下载器
-## 重写了下载页面的部分，提高了下载的成功率
+## 重写了下载页面的部分，采用了不同于其他下载器的下载方法，显著减少下载失败
 <img width="762" alt="截屏2021-09-21 下午3 53 35" src="https://user-images.githubusercontent.com/77945509/134133321-0e4024d6-0df7-4305-a859-e798ed61a2ea.png">
 
 
-Download pages from http://reserves.lib.tsinghua.edu.cn/
+从http://reserves.lib.tsinghua.edu.cn/处免费下载教材以及图书
 
 自动下载书籍每一页的原图，免登录。
 
