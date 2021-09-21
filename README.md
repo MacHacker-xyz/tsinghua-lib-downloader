@@ -1,5 +1,6 @@
-# 有图形化界面的清华大学教参服务平台下载器
-<img width="762" alt="截屏2021-09-16 下午3 31 03" src="https://user-images.githubusercontent.com/77945509/133569567-39b61b75-4003-4d71-abb5-36d42201d0b1.png">
+# 图形化教参平台自动下载器
+## 重写了下载页面的部分，为借鉴其他的开源项目，提高了下载的成功率
+<img width="762" alt="截屏2021-09-21 下午3 53 35" src="https://user-images.githubusercontent.com/77945509/134133321-0e4024d6-0df7-4305-a859-e798ed61a2ea.png">
 
 
 Download pages from http://reserves.lib.tsinghua.edu.cn/
