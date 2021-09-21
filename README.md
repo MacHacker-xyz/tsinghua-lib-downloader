@@ -11,12 +11,9 @@ Download pages from http://reserves.lib.tsinghua.edu.cn/
 <img width="1718" alt="截屏2021-09-16 下午3 36 42" src="https://user-images.githubusercontent.com/77945509/133570595-81a624c1-0a81-4ddc-82f6-dfaf12b61a35.png">
 先确保安装好了Python3的运行环境，在IDE中运行downloader_graphics.py或者在命令行输入python downloader_graphics.py即可使用
 
-运行软件，输入`阅读全文`之下的链接地址（如图中标黄的位置）。程序会自动爬取当前章节以下的所有章节。
+运行软件，输入`阅读全文`之下的任意的链接地址（如图中标红的位置）。并输入图书的名称，点击下载按钮，并选择下载路径，软件会下载每一页，并保存在固定的路径
 
-程序会将图片保存在你选择的目标路径下，并自动生成PDF。
 
 **此软件程序无需登录即可使用**。
 
-## Q&A
-
-*仅供学习编程，请勿用于非法用途！*
+# *仅供学习编程，请勿用于非法用途！*
