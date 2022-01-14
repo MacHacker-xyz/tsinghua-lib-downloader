@@ -1,6 +1,5 @@
 # 最新版本中加入了对多线程下载的支持，支持线程数量的调整
 > ## 有图形化界面的清华大学教参服务平台下载器
-![Uploading 截屏2022-01-14 下午8.09.11.png…]()
 
 Download pages from http://reserves.lib.tsinghua.edu.cn/
 
