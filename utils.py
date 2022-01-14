@@ -1,6 +1,16 @@
 import os
-import img2pdf
 import shutil
+
+
+try:
+    import img2pdf
+
+except:
+    import os
+    os.system('sudo pip3 install img2pdf')
+    import img2pdf
+
+
 
 def get_url_nums(driver,):
     url_num = 0

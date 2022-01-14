@@ -3,9 +3,15 @@ import tkinter.font as tkFont
 from tkinter import filedialog
 import downloader
 import threading
-from PIL import Image,ImageTk
 
-#"http://reserves.lib.tsinghua.edu.cn/book5//00001042/00001042000/mobile/index.html"
+try:
+    from PIL import Image,ImageTk
+except:
+    import os
+    os.system('sudo pip3 install PIL')
+    from PIL import Image,ImageTk
+
+
 def begin():
     url = entry1.get()
     pdf_name = entry2.get()
@@ -18,14 +24,15 @@ def begin():
     var1.set("初始化！")
     window.update()
     global thread
-    thread = threading.Thread(target=downloader.implicit_download,args=(download_path,url,pdf_name, window, var1))
+    thread = threading.Thread(target=downloader.implicit_download,args=(download_path,url,pdf_name, window, var1, int(scale.get())))
+    thread.setDaemon(True)
     thread.start()
 
 
 if __name__=="__main__":
     window = tk.Tk()
     window.geometry("650x391")
-    window.title("教参平台爬虫")
+    window.title("教参平台下载工具")
     window.maxsize(width=650,height=391)
     window.minsize(width=650,height=391)    
     image = Image.open("bk.png")
@@ -40,16 +47,19 @@ if __name__=="__main__":
     background.pack()
     
     var1 = tk.StringVar()
+    var1.set("本软件仅用于编程使用\n发售盗版内容者承担一切法律责任！")
+
     label1 = tk.Label(
         window,
         text="网址",
         background="#F7F7F7",
         font=tkFont.Font(family='ComicSansMS', size=20, weight=tkFont.BOLD)
     )
+
     label1.place(
         anchor="n",
-        x=325,
-        y=0
+        x=150,
+        y=20
     )
     entry1 = tk.Entry(
         window,
@@ -58,7 +68,7 @@ if __name__=="__main__":
     entry1.place(
         anchor="n",
         x=325,
-        y=40
+        y=20
     )
     label2 = tk.Label(
         window,
@@ -68,7 +78,7 @@ if __name__=="__main__":
     )
     label2.place(
         anchor="n",
-        x=325,
+        x=150,
         y=80
     )
     entry2 = tk.Entry(
@@ -79,19 +89,33 @@ if __name__=="__main__":
     entry2.place(
         anchor="n",
         x=325,
-        y=120
+        y=80
     )
-    label_warning = tk.Label(
+
+    label4 = tk.Label(
         window,
-        text="本软件仅供学习编程知识\n发售盗版内容者承担一切法律责任",
-        fg="Red",
+        text="线程数",
         background="#F7F7F7",
         font=tkFont.Font(family='ComicSansMS', size=20, weight=tkFont.BOLD)
     )
-    label_warning.place(
+
+    label4.place(
         anchor="n",
-        x=325,
-        y=170
+        x=130,
+        y=150
+    )
+
+    scale = tk.Scale(
+        window,from_=1,
+        to=32,
+        tickinterval=4,
+        orient=tk.HORIZONTAL,
+        length=280)
+    
+    scale.place(
+        anchor="n",
+        x = 325,
+        y = 140
     )
     button = tk.Button(
         window,
@@ -103,7 +127,7 @@ if __name__=="__main__":
     button.place(
         anchor="n",
         x=325,
-        y=240
+        y=210
     )
     label3 = tk.Label(
         window,
@@ -114,6 +138,7 @@ if __name__=="__main__":
     label3.place(
         anchor="n",
         x=325,
-        y=290
+        y=260
     )
     window.mainloop()
+
